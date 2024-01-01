@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    
+</head>
+<body>
+  <!-- Include the previous HTML code -->
+
+<section id="quiz">
+    <h2>Quiz App</h2>
+    <div id="question"></div>
+    <div id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+</section>
+</body>
+    var questions = [
+    { question: 'What is the capital of France?', options: ['Paris', 'Berlin', 'London'], correctAnswer: 'Paris' },
+    // Add more questions here
+];
+
+var currentQuestion = 0;
+
+function loadQuestion() {
+    var questionDiv = document.getElementById('question');
+    var optionsDiv = document.getElementById('options');
+    
+    questionDiv.textContent = questions[currentQuestion].question;
+    
+    optionsDiv.innerHTML = '';
+    questions[currentQuestion].options.forEach(function(option) {
+        var button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = function() {
+            checkAnswer(option);
+        };
+        optionsDiv.appendChild(button);
+    });
+}
+
+function checkAnswer(selectedOption) {
+    if (selectedOption === questions[currentQuestion].correctAnswer) {
+        alert('Correct!');
+    } else {
+        alert('Incorrect!');
+    }
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        alert('Quiz completed!');
+    }
+}
+
+loadQuestion();
+
+
+
+</html>
